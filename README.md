@@ -2,6 +2,8 @@
   <img src="src/assets/app_icon.png" alt="Elvan Nammil Logo" width="128" />
   <h1>Elvan Nammil</h1>
   <p><strong>A beautifully crafted, high-performance messaging client powered by React, Electron, and WinUI 3.</strong></p>
+  <br/>
+  <img src="src/assets/hero.png" alt="Elvan Nammil Hero Image" width="600" />
 </div>
 
 ---
@@ -19,6 +21,18 @@
 - **Electron Core**: Leverages the power of Electron for deep operating system integration, notifications, tray controls, and robust background services.
 - **Custom Native Installer**: Includes a custom-built **WinUI 3** setup executable. Experience a flawless, native Windows 11 installation flow featuring Mica glass effects and intelligent setup routing.
 - **Instant Launch**: Bypasses tedious first-boot configurations. The installer securely sets up your account and media paths on the fly, seamlessly dropping you into the app upon completion.
+
+---
+
+## ⚙️ App Configuration & Settings
+
+Elvan Nammil offers deep configuration options managed through a robust internal `SettingsManager`:
+- **Theme Engine**: Syncs with Windows system settings (Light/Dark/System) dynamically using Electron's `nativeTheme` API.
+- **Multi-Account Support**: Manage multiple isolated profiles (e.g., Personal, Work) seamlessly.
+- **Bespoke Notification Sounds**: Choose from high-quality custom notification chimes like *Kumizhi*, *Minnal*, *Alai*, *Thendral*, *Thuli*, and *Thullal*.
+- **Per-Account Sounds**: Assign specific notification sounds to different accounts so you instantly know who received a message.
+- **Dynamic Media Management**: Set up custom local media folders. The app automatically defaults to intelligently locating or creating an `Elvan Nammil\Media` directory inside your Documents folder.
+- **Auto-Organization**: Toggleable media auto-organization with robust duplicate file handling (Skip/Overwrite).
 
 ---
 
