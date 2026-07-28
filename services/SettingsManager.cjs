@@ -125,10 +125,23 @@ class SettingsManager {
       this.saveSettingsSync(s);
     });
 
-    ipcMain.handle('complete-first-boot', (event, newAccounts) => {
+    ipcMain.handle('complete-first-boot', (event, newAccounts, mediaFolder) => {
       let settings = this.getSettingsSync();
       settings.accounts = newAccounts;
       settings.isFirstBoot = false;
+
+      if (mediaFolder) {
+        let finalPath = mediaFolder;
+        if (!finalPath.toLowerCase().endsWith('media') && !finalPath.toLowerCase().includes('elvan nammil')) {
+          finalPath = path.join(finalPath, 'Elvan Nammil', 'Media');
+        }
+        settings.mediaFolder = finalPath;
+        settings.mediaFolderPath = finalPath;
+        if (!fs.existsSync(finalPath)) {
+          fs.mkdirSync(finalPath, { recursive: true });
+        }
+      }
+
       this.saveSettingsSync(settings);
 
       // Create views for the initial accounts
@@ -229,6 +242,16 @@ class SettingsManager {
 
     ipcMain.handle('get-base-media-dir', () => {
       return this.getMediaFolder();
+    });
+
+    ipcMain.handle('pick-folder', async () => {
+      const mainWindow = orchestrator.windowManager.mainWindow;
+      const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
+        title: 'Select Storage Location',
+        properties: ['openDirectory', 'createDirectory']
+      });
+      if (canceled || filePaths.length === 0) return null;
+      return filePaths[0];
     });
 
     ipcMain.handle('change-media-folder', async () => {

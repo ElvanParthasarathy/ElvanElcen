@@ -11,6 +11,7 @@ import SplashScreen from './components/SplashScreen';
 import MediaLibrary from './components/Media/index';
 import NotificationsPage, { NotificationItem } from './components/NotificationsPage/index';
 import { useI18n } from './i18n/I18nContext';
+import Onboarding from './components/Onboarding/index';
 
 function App() {
   const { setLang } = useI18n();
@@ -20,6 +21,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('settings');
   const [accounts, setAccounts] = useState([{ id: 'default', name: 'personal' }]);
   const [settingsLoaded, setSettingsLoaded] = useState(false);
+  const [isFirstBoot, setIsFirstBoot] = useState(false);
   const [notifications, setNotifications] = useState<NotificationItem[]>(() => {
     try {
       const stored = localStorage.getItem('nammil-notifications');
@@ -42,6 +44,7 @@ function App() {
             setAccounts(settings.accounts);
             setActiveTab(`wa-${settings.accounts[0].id}`);
           }
+          if (settings.isFirstBoot === true) setIsFirstBoot(true);
         }
         setSettingsLoaded(true);
         if (!isDevSplash) setTimeout(() => setShowSplash(false), 2500);
@@ -118,6 +121,19 @@ function App() {
   if (!settingsLoaded) {
     return (
       <Box sx={{ width: '100vw', height: '100vh', bgcolor: actualMode === 'dark' ? '#1d1f1f' : '#F7F5F3' }} />
+    );
+  }
+
+  if (isFirstBoot) {
+    return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Onboarding onComplete={(newAccounts) => {
+          setAccounts(newAccounts);
+          setActiveTab(`wa-${newAccounts[0].id}`);
+          setIsFirstBoot(false);
+        }} />
+      </ThemeProvider>
     );
   }
 

@@ -23,6 +23,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.on('migration-progress', handler);
     return () => ipcRenderer.removeListener('migration-progress', handler);
   },
+  pickFolder: () => ipcRenderer.invoke('pick-folder'),
 
   // ── Notification APIs ──
   selectCustomSound: () => ipcRenderer.invoke('select-custom-sound'),
