@@ -1,0 +1,29 @@
+<Page
+    x:Class="Nammil_Installer.Pages.ProgressPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nammil_Installer.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <Grid Padding="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Installing Elvan Nammil" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="SemiBold" />
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Spacing="16">
+            <TextBlock x:Name="StatusText" Text="Extracting files..." HorizontalAlignment="Center" />
+            <ProgressBar x:Name="InstallProgress" IsIndeterminate="True" Height="4" />
+        </StackPanel>
+
+        <StackPanel x:Name="FinishedPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12" Visibility="Collapsed">
+            <Button Content="Finish &amp; Launch" Click="Finish_Click" Style="{ThemeResource AccentButtonStyle}" Width="150" CornerRadius="8" />
+        </StackPanel>
+    </Grid>
+</Page>

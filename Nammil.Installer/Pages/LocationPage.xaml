@@ -1,0 +1,55 @@
+<Page
+    x:Class="Nammil_Installer.Pages.LocationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nammil_Installer.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <Grid Padding="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Select Destination Locations" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="SemiBold" />
+
+        <StackPanel Grid.Row="1" Spacing="24" Margin="0,32,0,0">
+            
+            <StackPanel Spacing="8">
+                <TextBlock Text="Where should Elvan Nammil be installed?" FontWeight="SemiBold" />
+                <TextBlock Text="The app binaries will be extracted to the following folder." Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12" />
+                <Grid ColumnSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="AppPathBox" Text="C:\Program Files\Elvan Nammil" CornerRadius="6" VerticalAlignment="Center" />
+                    <Button Grid.Column="1" Content="Browse..." CornerRadius="6" Click="BrowseApp_Click" />
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="Where should your Media be saved?" FontWeight="SemiBold" />
+                <TextBlock Text="All downloaded images, videos, and documents will go here." Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12" />
+                <Grid ColumnSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="MediaPathBox" CornerRadius="6" VerticalAlignment="Center" />
+                    <Button Grid.Column="1" Content="Browse..." CornerRadius="6" Click="BrowseMedia_Click" />
+                </Grid>
+            </StackPanel>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12">
+            <Button Content="Back" Click="Back_Click" Width="100" CornerRadius="8" />
+            <Button Content="Next" Click="Next_Click" Style="{ThemeResource AccentButtonStyle}" Width="100" CornerRadius="8" />
+        </StackPanel>
+    </Grid>
+</Page>

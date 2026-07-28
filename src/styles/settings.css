@@ -1,0 +1,134 @@
+/* ==========================================================================
+   SETTINGS HUB — Two-panel layout + profile card
+   ========================================================================== */
+
+/* ── Page View (outer wrapper) ── */
+.s2-page-view {
+    width: 100%;
+    font-family: inherit;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.s2-content-grid {
+    display: grid;
+    grid-template-columns: 500px 1fr;
+    gap: 0;
+    align-items: stretch;
+    height: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.s2-col-left {
+    padding-top: 32px;
+    padding-left: 24px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+}
+
+.s2-col-right {
+    padding-top: 32px;
+    padding-left: 32px;
+    padding-right: 24px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 64px;
+    min-width: 0;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+}
+
+.s2-col-left>*,
+.s2-col-right>* {
+    flex-shrink: 0;
+}
+
+/* ── Custom Pill Scrollbars for Layout ── */
+.s2-col-left::-webkit-scrollbar,
+.s2-col-right::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: transparent;
+}
+.s2-col-left::-webkit-scrollbar-track,
+.s2-col-right::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 8px;
+}
+.s2-col-left::-webkit-scrollbar-thumb,
+.s2-col-right::-webkit-scrollbar-thumb {
+    background: rgba(150, 150, 150, 0.5);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+.s2-col-left::-webkit-scrollbar-thumb:hover,
+.s2-col-right::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(150, 150, 150, 0.8);
+}
+
+.s2-col-left>*,
+.s2-col-right>* {
+    flex-shrink: 0;
+}
+
+/* ── Settings Group (Card) ── */
+.s2-group {
+    background: var(--mac-card-bg);
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+/* ── Settings Item Row ── */
+.s2-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+    text-decoration: none;
+    color: inherit;
+    border: none;
+    outline: none;
+    background: none;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+@media (hover: hover) {
+    .s2-item:hover {
+        background: var(--mac-selection-hover);
+    }
+}
+
+/* ── Sub-Page Header ── */
+.s2-sub-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.s2-sub-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--mac-text);
+    letter-spacing: -0.5px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

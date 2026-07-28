@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Nammil.Installer (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Nammil.Installer (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
