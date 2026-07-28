@@ -2,8 +2,6 @@
   <img src="src/assets/app_icon.png" alt="Elvan Nammil Logo" width="128" />
   <h1>Elvan Nammil</h1>
   <p><strong>A beautifully crafted, high-performance messaging client powered by React, Electron, and WinUI 3.</strong></p>
-  <br/>
-  <img src="src/assets/hero.png" alt="Elvan Nammil Hero Image" width="600" />
 </div>
 
 ---
