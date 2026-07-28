@@ -30,7 +30,7 @@ namespace Nammil_Installer
             var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hwnd);
             var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
             
-            appWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 700, Height = 500 });
+            appWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 700, Height = 600 });
             var displayArea = Microsoft.UI.Windowing.DisplayArea.GetFromWindowId(windowId, Microsoft.UI.Windowing.DisplayAreaFallback.Primary);
             if (displayArea != null)
             {
