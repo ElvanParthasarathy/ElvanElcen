@@ -19,41 +19,28 @@ namespace Nammil_Installer.Pages
             AppPathBox.Text = SelectedAppPath;
         }
 
-        private async void BrowseApp_Click(object sender, RoutedEventArgs e)
+        private void BrowseApp_Click(object sender, RoutedEventArgs e)
         {
-            var folderPicker = new Windows.Storage.Pickers.FolderPicker();
-            folderPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.ComputerFolder;
-            folderPicker.FileTypeFilter.Add("*");
-            
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(MainWindow.Current);
-            WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hwnd);
-
-            var folder = await folderPicker.PickSingleFolderAsync();
-            if (folder != null)
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
             {
-                AppPathBox.Text = Path.Combine(folder.Path, "Elvan Nammil");
+                dialog.Description = "Select Installation Folder";
+                dialog.UseDescriptionForTitle = true;
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    AppPathBox.Text = Path.Combine(dialog.SelectedPath, "Elvan Nammil");
+                }
             }
         }
 
-        private async void BrowseMedia_Click(object sender, RoutedEventArgs e)
+        private void BrowseMedia_Click(object sender, RoutedEventArgs e)
         {
-            var folderPicker = new Windows.Storage.Pickers.FolderPicker();
-            folderPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
-            folderPicker.FileTypeFilter.Add("*");
-            
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(MainWindow.Current);
-            WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hwnd);
-
-            var folder = await folderPicker.PickSingleFolderAsync();
-            if (folder != null)
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
             {
-                if (folder.Path.EndsWith("Media") || folder.Path.EndsWith("Elvan Nammil"))
+                dialog.Description = "Select Media Folder";
+                dialog.UseDescriptionForTitle = true;
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    MediaPathBox.Text = folder.Path;
-                }
-                else
-                {
-                    MediaPathBox.Text = Path.Combine(folder.Path, "Elvan Nammil", "Media");
+                    MediaPathBox.Text = dialog.SelectedPath;
                 }
             }
         }

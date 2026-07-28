@@ -20,9 +20,15 @@ namespace Nammil_Installer.Services
                     Directory.CreateDirectory(appPath);
                 }
 
-                if (!Directory.Exists(mediaPath))
+                string finalMediaPath = mediaPath;
+                if (!finalMediaPath.EndsWith("Media", StringComparison.OrdinalIgnoreCase) && !finalMediaPath.Contains("Elvan Nammil", StringComparison.OrdinalIgnoreCase))
                 {
-                    Directory.CreateDirectory(mediaPath);
+                    finalMediaPath = Path.Combine(finalMediaPath, "Elvan Nammil", "Media");
+                }
+
+                if (!Directory.Exists(finalMediaPath))
+                {
+                    Directory.CreateDirectory(finalMediaPath);
                 }
 
                 // 2. Extract Embedded Zip
@@ -69,8 +75,8 @@ namespace Nammil_Installer.Services
                     notificationSound = "kumizhi",
                     accountSounds = new { },
                     isFirstBoot = false,
-                    mediaFolder = mediaPath,
-                    mediaFolderPath = mediaPath,
+                    mediaFolder = finalMediaPath,
+                    mediaFolderPath = finalMediaPath,
                     accounts = new[]
                     {
                         new { id = "account_1", name = accountName }
