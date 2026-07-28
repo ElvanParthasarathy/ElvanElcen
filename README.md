@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/splash.png" alt="Elvan Nammil Logo" width="250" />
+  <img src="src/assets/app_icon.png" alt="Elvan Nammil Logo" width="128" />
   <h1>Elvan Nammil</h1>
   <p><strong>A beautifully crafted, high-performance messaging client powered by React, Electron, and WinUI 3.</strong></p>
 </div>
