@@ -47,7 +47,14 @@ namespace Nammil_Installer.Pages
             var folder = await folderPicker.PickSingleFolderAsync();
             if (folder != null)
             {
-                MediaPathBox.Text = folder.Path;
+                if (folder.Path.EndsWith("Media") || folder.Path.EndsWith("Elvan Nammil"))
+                {
+                    MediaPathBox.Text = folder.Path;
+                }
+                else
+                {
+                    MediaPathBox.Text = Path.Combine(folder.Path, "Elvan Nammil", "Media");
+                }
             }
         }
 

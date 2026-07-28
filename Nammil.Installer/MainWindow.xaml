@@ -21,7 +21,7 @@
         <!-- Custom Title Bar -->
         <Grid x:Name="AppTitleBar" Grid.Row="0" Background="Transparent">
             <StackPanel Orientation="Horizontal" Margin="16,0,0,0" VerticalAlignment="Center">
-                <Image Source="ms-appx:///Assets/Square44x44Logo.scale-200.png" Width="16" Height="16" Margin="0,0,8,0" />
+                <Image x:Name="TitleBarLogo" Width="16" Height="16" Margin="0,0,8,0" />
                 <TextBlock Text="Elvan Nammil Setup" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Variable"/>
             </StackPanel>
         </Grid>

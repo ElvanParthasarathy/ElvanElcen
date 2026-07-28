@@ -54,6 +54,12 @@ namespace Nammil_Installer
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(AppTitleBar);
 
+            string logoPath = Path.Combine(AppContext.BaseDirectory, "Assets", "Square44x44Logo.scale-200.png");
+            if (File.Exists(logoPath))
+            {
+                TitleBarLogo.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri(logoPath));
+            }
+
             RootFrame.Navigate(typeof(Pages.WelcomePage));
         }
 
