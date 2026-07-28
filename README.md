@@ -9,6 +9,13 @@
 ## ✨ Features
 
 - **Modern UI/UX**: Built with React and styled with a custom design system for a fluid, responsive, and stunning visual experience.
+- **Custom Typography**: Features the bespoke **Elvan Sans** font, giving the application a deeply personal and premium aesthetic.
+- **Rich Localization**: Fully translated and localized with deep i18n support, featuring out-of-the-box language support for:
+  - 🇺🇸 English
+  - 🇮🇳 Tamil (தமிழ்)
+  - 🇮🇳 Tamil Latin (Thamizh)
+  - 🇮🇳 Malayalam (മലയാളം)
+  - 🔣 Neram
 - **Electron Core**: Leverages the power of Electron for deep operating system integration, notifications, tray controls, and robust background services.
 - **Custom Native Installer**: Includes a custom-built **WinUI 3** setup executable. Experience a flawless, native Windows 11 installation flow featuring Mica glass effects and intelligent setup routing.
 - **Instant Launch**: Bypasses tedious first-boot configurations. The installer securely sets up your account and media paths on the fly, seamlessly dropping you into the app upon completion.
