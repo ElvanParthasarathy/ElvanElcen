@@ -1,7 +1,48 @@
-# Tauri + Vanilla
+<div align="center">
+  <img src="public/splash.png" alt="Elvan Nammil Logo" width="250" />
+  <h1>Elvan Nammil</h1>
+  <p><strong>A beautifully crafted, high-performance messaging client powered by React, Electron, and WinUI 3.</strong></p>
+</div>
 
-This template should help get you started developing with Tauri in vanilla HTML, CSS and Javascript.
+---
 
-## Recommended IDE Setup
+## ✨ Features
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+- **Modern UI/UX**: Built with React and styled with a custom design system for a fluid, responsive, and stunning visual experience.
+- **Electron Core**: Leverages the power of Electron for deep operating system integration, notifications, tray controls, and robust background services.
+- **Custom Native Installer**: Includes a custom-built **WinUI 3** setup executable. Experience a flawless, native Windows 11 installation flow featuring Mica glass effects and intelligent setup routing.
+- **Instant Launch**: Bypasses tedious first-boot configurations. The installer securely sets up your account and media paths on the fly, seamlessly dropping you into the app upon completion.
+
+---
+
+## 🏗️ Architecture
+
+- `src/` - React frontend code (Vite).
+- `services/` - Core Electron backend services (Window management, Tray, Notifications).
+- `Nammil.Installer/` - Native C# WinUI 3 Installer project.
+
+---
+
+## 🛠️ Build Instructions
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) & `npm`
+- [.NET 9.0 SDK](https://dotnet.microsoft.com/)
+- [Windows App SDK](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/)
+
+### Compiling the App & Installer
+
+We have integrated a seamless, one-click PowerShell pipeline that compiles the React app, zips the Electron binaries, injects them into the C# project, and publishes the final `Setup.exe`.
+
+1. Open a PowerShell terminal as Administrator (to bypass execution policies).
+2. Run the build script:
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File .\build_custom_installer.ps1
+   ```
+3. Once completed, the final standalone installer will be outputted to:
+   `Nammil.Installer\bin\Release\net8.0-windows10.0.26100.0\win-x64\publish\Nammil.Installer.exe`
+
+---
+
+## 📝 License
+Proprietary & Confidential - Created by Elvan Parthasarathy
