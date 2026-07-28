@@ -31,6 +31,17 @@ namespace Nammil_Installer
             var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
             
             appWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 700, Height = 600 });
+            
+            var presenter = appWindow.Presenter as Microsoft.UI.Windowing.OverlappedPresenter;
+            if (presenter != null)
+            {
+                presenter.IsMaximizable = false;
+                presenter.IsMinimizable = false;
+                presenter.IsResizable = false;
+            }
+
+            appWindow.SetIcon("Assets/AppIcon.ico");
+
             var displayArea = Microsoft.UI.Windowing.DisplayArea.GetFromWindowId(windowId, Microsoft.UI.Windowing.DisplayAreaFallback.Primary);
             if (displayArea != null)
             {
