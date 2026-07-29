@@ -414,12 +414,12 @@ export const ta = {
   [k.RESET_APP_TITLE]: {
     ta: 'செயலித் தரவை அழி',
     latn: 'Cheyalith tharavai azhi',
-    ml: 'ചെയലി ത്തറവൈ അഴി',
+    ml: 'ചെയലി ത്തരവൈ അഴി',
   },
   [k.RESET_APP_DESC]: {
     ta: 'எல்லா தரவையும் அழித்து புதிதாகத் தொடங்கு. ஊடகத் தரவுகள் அழியாது.',
     latn: 'Ella tharavaiyum azhithu pudhidhaagath thodangu. Oodagath tharavugal azhiyaadhu.',
-    ml: 'എല്ലാ തറവൈയും അഴിത്തു പുതിതാകാ ത്തൊടങ്കു. ഊടക ത്തരവുകൾ അഴിയാതു.',
+    ml: 'എല്ലാ തരവൈയും അഴിത്തു പുതിതാകാ ത്തൊടങ്കു. ഊടക ത്തരവുകൾ അഴിയാതു.',
   },
   [k.RESET_APP_BTN]: {
     ta: 'அழி',
@@ -429,7 +429,7 @@ export const ta = {
   [k.RESET_APP_CONFIRM]: {
     ta: 'எல்லா தரவையும் அழிக்க வேண்டுமா? கணக்குகள் வெளியேற்றப்படும், ஆனால் ஊடகத் தரவுகள் பாதுகாப்பாக இருக்கும்.',
     latn: 'Ella tharavaiyum azhikka vaendumaa? Kanakkugal veliyaettrappadum, aanaal oodagath tharavugal paadhugaappaaga irukkum.',
-    ml: 'എല്ലാ തറവൈയും അഴിക്ക വേൺടുമാ? കണക്കുകൾ വെളിയേറ്റപ്പടും, ആനാൽ ഊടക ത്തരവുകൾ പാതുകാപ്പാക ഇരുക്കും.',
+    ml: 'എല്ലാ തരവൈയും അഴിക്ക വേൺടുമാ? കണക്കുകൾ വെളിയേറ്റപ്പടും, ആനാൽ ഊടക ത്തരവുകൾ പാതുകാപ്പാക ഇരുക്കും.',
   },
   [k.DATE_TODAY]: {
     ta: 'இன்று',
