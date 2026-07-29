@@ -125,10 +125,22 @@ class SettingsManager {
       this.saveSettingsSync(s);
     });
 
-    ipcMain.handle('complete-first-boot', (event, newAccounts) => {
+    ipcMain.handle('complete-first-boot', (event, newAccounts, mediaFolder) => {
       let settings = this.getSettingsSync();
       settings.accounts = newAccounts;
       settings.isFirstBoot = false;
+
+      if (mediaFolder) {
+        let finalPath = mediaFolder;
+        if (!finalPath.toLowerCase().endsWith('media') && !finalPath.toLowerCase().includes('elvan nammil')) {
+          finalPath = path.join(finalPath, 'Elvan Nammil', 'Media');
+        }
+        settings.mediaFolder = finalPath;
+        settings.mediaFolderPath = finalPath;
+        if (!fs.existsSync(finalPath)) {
+          fs.mkdirSync(finalPath, { recursive: true });
+        }
+      }
 
       this.saveSettingsSync(settings);
 

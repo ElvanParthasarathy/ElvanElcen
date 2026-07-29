@@ -14,7 +14,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   openMedia: (filePath) => ipcRenderer.send('open-media', filePath),
   showInFolder: (filePath) => ipcRenderer.send('show-in-folder', filePath),
   updateAccounts: (newAccounts) => ipcRenderer.invoke('update-accounts', newAccounts),
-  completeFirstBoot: (newAccounts) => ipcRenderer.invoke('complete-first-boot', newAccounts),
+  completeFirstBoot: (newAccounts, mediaFolder) => ipcRenderer.invoke('complete-first-boot', newAccounts, mediaFolder),
   updateTheme: (theme) => ipcRenderer.send('update-theme', theme),
   getBaseMediaDir: () => ipcRenderer.invoke('get-base-media-dir'),
   changeMediaFolder: () => ipcRenderer.invoke('change-media-folder'),

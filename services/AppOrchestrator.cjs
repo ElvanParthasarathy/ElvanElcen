@@ -76,10 +76,7 @@ class AppOrchestrator {
         // 2. Clear default session (main app UI)
         await session.defaultSession.clearStorageData();
         
-        // 3. Reset settings to default with isFirstBoot=true, while preserving mediaFolder config if any
-        const mediaFolder = settings.mediaFolder;
-        const mediaFolderPath = settings.mediaFolderPath;
-        
+        // 3. Reset settings to default with isFirstBoot=true
         const defaultSettings = { 
           language: 'system', 
           theme: 'system',
@@ -92,9 +89,6 @@ class AppOrchestrator {
             { id: 'account_1', name: 'Personal' }
           ]
         };
-        
-        if (mediaFolder) defaultSettings.mediaFolder = mediaFolder;
-        if (mediaFolderPath) defaultSettings.mediaFolderPath = mediaFolderPath;
         
         this.settingsManager.saveSettingsSync(defaultSettings);
         
