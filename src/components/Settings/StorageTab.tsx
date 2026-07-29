@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, CircularProgress, IconButton, Tooltip } from '@mui/material';
-import { HardDrives, Warning, Trash } from '@phosphor-icons/react';
+import { HardDrives, Warning, Trash, FolderOpen } from '@phosphor-icons/react';
 import { useI18n } from '../../i18n/I18nContext';
 import { k } from '../../i18n/k';
 import { SettingsSection as ElvanSettingsSection, SettingsRow } from '../shared/ElvanSettingsSection';
@@ -60,30 +60,21 @@ export default function StorageTab() {
           title={t(k.STORAGE_MEDIA_FOLDER)}
           description={currentPath}
           control={
-            <Button 
-              variant="contained"
-              disableElevation
-              onClick={handleChangeFolder}
-              disabled={isMigrating}
-              sx={{ 
-                borderRadius: '500px', 
-                textTransform: 'none', 
-                fontWeight: 600, 
-                bgcolor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)', 
-                color: 'var(--mac-text)',
-                border: 'none',
-                boxShadow: 'none',
-                px: 2.5,
-                py: 0.8,
-                minWidth: '135px',
-                '&:hover': {
-                  bgcolor: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.1)',
-                  boxShadow: 'none'
-                }
-              }}
-            >
-              {t(k.BTN_CHANGE_FOLDER)}
-            </Button>
+            <Tooltip title={t(k.BTN_CHANGE_FOLDER)} placement="top" arrow>
+              <IconButton 
+                onClick={handleChangeFolder}
+                disabled={isMigrating}
+                sx={{ 
+                  bgcolor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)', 
+                  color: 'var(--mac-text)',
+                  '&:hover': {
+                    bgcolor: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.1)',
+                  }
+                }}
+              >
+                <FolderOpen size={20} weight="bold" />
+              </IconButton>
+            </Tooltip>
           }
         />
         <SettingsRow
