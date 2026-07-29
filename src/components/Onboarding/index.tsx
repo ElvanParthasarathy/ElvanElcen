@@ -28,10 +28,22 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
   }, []);
 
   const handleBrowse = async () => {
-    if ((window as any).electronAPI && (window as any).electronAPI.pickFolder) {
-      const selectedFolder = await (window as any).electronAPI.pickFolder();
-      if (selectedFolder) {
-        setMediaFolder(selectedFolder);
+    if ((window as any).electronAPI && (window as any).electronAPI.changeMediaFolder) {
+      setIsLoading(true);
+      try {
+        const result = await (window as any).electronAPI.changeMediaFolder();
+        if (!result) return;
+        if (typeof result === 'string') {
+          setMediaFolder(result);
+        } else if (result.success) {
+          setMediaFolder(result.newPath || result.path);
+        } else if (result.reason !== 'canceled') {
+          alert(result.error || result.reason || 'Failed to change folder');
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -43,7 +55,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
     try {
       if ((window as any).electronAPI) {
         const newAccounts = [{ id: 'account_1', name: accountName.trim() }];
-        const accounts = await (window as any).electronAPI.completeFirstBoot(newAccounts, mediaFolder);
+        const accounts = await (window as any).electronAPI.completeFirstBoot(newAccounts);
         onComplete(accounts);
       } else {
         onComplete([{ id: 'account_1', name: accountName.trim() }]);
