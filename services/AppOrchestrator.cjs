@@ -49,6 +49,55 @@ class AppOrchestrator {
       this.app.exit(0);
     });
 
+    ipcMain.handle('reset-app', async () => {
+      try {
+        const { session } = require('electron');
+        const settings = this.settingsManager.getSettingsSync();
+        
+        // 1. Clear session storage for all existing accounts
+        for (const acc of settings.accounts) {
+          const accSession = session.fromPartition(`persist:${acc.id}`);
+          if (accSession) {
+            await accSession.clearStorageData();
+          }
+        }
+        
+        // 2. Clear default session (main app UI)
+        await session.defaultSession.clearStorageData();
+        
+        // 3. Reset settings to default with isFirstBoot=true, while preserving mediaFolder config if any
+        const mediaFolder = settings.mediaFolder;
+        const mediaFolderPath = settings.mediaFolderPath;
+        
+        const defaultSettings = { 
+          language: 'en', 
+          theme: 'system',
+          autoOrganize: true, 
+          duplicateAction: 'skip',
+          notificationSound: 'kumizhi',
+          accountSounds: {},
+          isFirstBoot: true,
+          accounts: [
+            { id: 'account_1', name: 'Personal' }
+          ]
+        };
+        
+        if (mediaFolder) defaultSettings.mediaFolder = mediaFolder;
+        if (mediaFolderPath) defaultSettings.mediaFolderPath = mediaFolderPath;
+        
+        this.settingsManager.saveSettingsSync(defaultSettings);
+        
+        // 4. Relaunch
+        this.app.isQuitting = true;
+        this.app.relaunch();
+        this.app.exit(0);
+        return { success: true };
+      } catch (e) {
+        console.error('Reset app failed:', e);
+        return { success: false, error: e.toString() };
+      }
+    });
+
     ipcMain.handle('get-app-version', () => {
       return this.app.getVersion();
     });

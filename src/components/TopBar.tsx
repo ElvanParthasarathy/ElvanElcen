@@ -121,6 +121,8 @@ export default function TopBar({
                             fontSize: '9px',
                             padding: '0 2px',
                             lineHeight: '14px',
+                          },
+                          '& .MuiBadge-badge:not(.MuiBadge-invisible)': {
                             transform: 'scale(1) translate(25%, -25%)',
                           }
                         }}
@@ -173,7 +175,9 @@ export default function TopBar({
                         fontSize: '9px',
                         padding: '0 2px',
                         lineHeight: '14px',
-                        transform: 'scale(1) translate(25%, -25%)', // shift slightly inward
+                      },
+                      '& .MuiBadge-badge:not(.MuiBadge-invisible)': {
+                        transform: 'scale(1) translate(25%, -25%)',
                       }
                     }}
                   >

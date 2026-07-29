@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, CircularProgress } from '@mui/material';
-import { HardDrives } from '@phosphor-icons/react';
+import { HardDrives, Warning } from '@phosphor-icons/react';
 import { useI18n } from '../../i18n/I18nContext';
 import { k } from '../../i18n/k';
 import { SettingsSection as ElvanSettingsSection, SettingsRow } from '../shared/ElvanSettingsSection';
@@ -75,6 +75,7 @@ export default function StorageTab() {
                 boxShadow: 'none',
                 px: 2.5,
                 py: 0.8,
+                minWidth: '135px',
                 '&:hover': {
                   bgcolor: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.1)',
                   boxShadow: 'none'
@@ -82,6 +83,43 @@ export default function StorageTab() {
               }}
             >
               {t(k.BTN_CHANGE_FOLDER)}
+            </Button>
+          }
+        />
+        <SettingsRow
+          icon={<Warning size={20} weight="fill" />}
+          iconColor="red"
+          title={t(k.RESET_APP_TITLE) || "Reset App Data"}
+          description={t(k.RESET_APP_DESC) || "Clear all sessions and return to first setup. Keeps media."}
+          control={
+            <Button 
+              variant="contained"
+              disableElevation
+              onClick={async () => {
+                if (window.confirm(t(k.RESET_APP_CONFIRM) || "Are you sure you want to reset all app data? This will log out all accounts but preserve your media folder.")) {
+                  if ((window as any).electronAPI) {
+                    await (window as any).electronAPI.resetApp();
+                  }
+                }
+              }}
+              sx={{ 
+                borderRadius: '500px', 
+                textTransform: 'none', 
+                fontWeight: 600, 
+                bgcolor: 'rgba(244, 67, 54, 0.1)', 
+                color: '#F44336',
+                border: 'none',
+                boxShadow: 'none',
+                px: 2.5,
+                py: 0.8,
+                minWidth: '135px',
+                '&:hover': {
+                  bgcolor: 'rgba(244, 67, 54, 0.2)',
+                  boxShadow: 'none'
+                }
+              }}
+            >
+              {t(k.RESET_APP_BTN) || "Reset App"}
             </Button>
           }
         />

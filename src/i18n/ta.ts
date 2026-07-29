@@ -411,6 +411,26 @@ export const ta = {
     latn: 'Koppuraiyai maatru',
     ml: 'കോപ്പുരൈയൈ മാറ്റു',
   },
+  [k.RESET_APP_TITLE]: {
+    ta: 'பயன்பாட்டு தரவை மீட்டமை',
+    latn: 'Payanpaattu tharavai meettamai',
+    ml: 'പയൻപാട്ടു തറവൈ മീട്ടമൈ',
+  },
+  [k.RESET_APP_DESC]: {
+    ta: 'அனைத்து அமர்வுகளையும் அழித்து முதல் அமைப்பிற்குத் திரும்புக. ஊடகங்களை வைத்திருக்கும்.',
+    latn: 'Anaithu amarvugalaiyum azhithu mudhal amaippirkuth thirumbuga. Oodagangalai vaithirukkum.',
+    ml: 'അനൈത്തു അമർവുകളെയും അഴിത്തു മുതൽ അമെപ്പിർക്കുത് തിരുമ്പുക. ഊഡഗങ്ങളെ വൈത്തിരുക്കും.',
+  },
+  [k.RESET_APP_BTN]: {
+    ta: 'மீட்டமை',
+    latn: 'Meettamai',
+    ml: 'മീട്ടമൈ',
+  },
+  [k.RESET_APP_CONFIRM]: {
+    ta: 'நிச்சயமாக அனைத்து பயன்பாட்டு தரவையும் மீட்டமைக்க வேண்டுமா? இது அனைத்து கணக்குகளையும் வெளியேற்றும், ஆனால் ஊடக கோப்புறையை பாதுகாக்கும்.',
+    latn: 'Nichchayamaaga anaithu payanpaattu tharavaiyum meettamaikka vendumaa? Idhu anaithu kanakkugalaiyum veliyetrum, aanaal oodaga koppuraiyai paadhugaakkum.',
+    ml: 'നിശ്ചയമാഗ അനൈത്തു പയൻപാട്ടു തറവൈയും മീട്ടമൈക്ക വെൺടുമാ? ഇദു അനൈത്തു കണക്കുകളെയും വെളിയേട്രും, ആനാൽ ഊഡഗ കോപ്പുറെയൈ പാതുഗാക്കും.',
+  },
   [k.DATE_TODAY]: {
     ta: 'இன்று',
     latn: 'Indru',

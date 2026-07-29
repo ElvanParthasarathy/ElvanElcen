@@ -406,6 +406,26 @@ export const ml = {
     latn: 'Folder mattuka',
     ta: 'ஃபோள்‌டர் மாற்று',
   },
+  [k.RESET_APP_TITLE]: {
+    ml: 'ആപ്പ് ഡാറ്റ റീസെറ്റ് ചെയ്യുക',
+    latn: 'App data reset cheyyuka',
+    ta: 'ஆப்ப் டேட்டா ரீஸெட் செய்யுக',
+  },
+  [k.RESET_APP_DESC]: {
+    ml: 'എല്ലാ സെഷനുകളും മായ്‌ച്ച് ആദ്യ സജ്ജീകരണത്തിലേക്ക് മടങ്ങുക. മീഡിയ നിലനിർത്തുന്നു.',
+    latn: 'Ella sessionukalum maayichu aadhya sajjeekaranathilekku madanguka. Media nilanirthunnu.',
+    ta: 'எல்லா செஷனுகளும் மாய்ச்சு ஆத்ய ஸஜ்ஜீகரணத்திலேக்கு மடங்குக. மீடியா நிலநிறுத்துன்னு.',
+  },
+  [k.RESET_APP_BTN]: {
+    ml: 'റീസെറ്റ് ചെയ്യുക',
+    latn: 'Reset cheyyuka',
+    ta: 'ரீஸெட் செய்யுக',
+  },
+  [k.RESET_APP_CONFIRM]: {
+    ml: 'എല്ലാ ആപ്പ് ഡാറ്റയും റീസെറ്റ് ചെയ്യണമെന്ന് ഉറപ്പാണോ? ഇത് എല്ലാ അക്കൗണ്ടുകളിൽ നിന്നും ലോഗ് ഔട്ട് ചെയ്യും, എന്നാൽ മീഡിയ ഫോൾഡർ നിലനിർത്തും.',
+    latn: 'Ella app datayum reset cheyyanamennu urappaano? Ithu ella accountukalil ninnum log out cheyyum, ennaal media folder nilanirthum.',
+    ta: 'எல்லா ஆப்ப் டேட்டாயும் ரீஸெட் செய்யணமென்னு உறப்பாணோ? இது எல்லா அக்கௌண்டுகளில் நின்னும் லோக் அவுட் செய்யும், என்னால் மீடியா ஃபோல்டர் நிலநிறுத்தும்.',
+  },
   [k.DATE_TODAY]: {
     ml: 'ഇന്ന്',
     latn: 'Innu',

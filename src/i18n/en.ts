@@ -89,6 +89,10 @@ export const en = {
   [k.STORAGE_DESC]: 'Manage your media folders',
   [k.STORAGE_MEDIA_FOLDER]: 'Media Folder',
   [k.BTN_CHANGE_FOLDER]: 'Change Folder',
+  [k.RESET_APP_TITLE]: 'Reset App Data',
+  [k.RESET_APP_DESC]: 'Clear all sessions and return to first setup. Keeps media.',
+  [k.RESET_APP_BTN]: 'Reset App',
+  [k.RESET_APP_CONFIRM]: 'Are you sure you want to reset all app data? This will log out all accounts but preserve your media folder.',
 
   [k.DATE_TODAY]: 'Today',
   [k.DATE_YESTERDAY]: 'Yesterday',
