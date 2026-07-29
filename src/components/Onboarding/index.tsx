@@ -5,6 +5,7 @@ import { OnboardingLayout, OnboardingHeader, OnboardingInput, OnboardingButton }
 import WelcomePhase from './WelcomePhase';
 import { useI18n } from '../../i18n/I18nContext';
 import { k } from '../../i18n/k';
+import { sanitizeName, validateAccountName } from '../Settings/validation';
 import NammilLogo from '../../assets/nammil_outline.webp';
 
 interface OnboardingProps {
@@ -50,15 +51,23 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
 
   const handleStart = async () => {
     if (!accountName.trim() || !mediaFolder.trim()) return;
+    
+    const sanitized = sanitizeName(accountName);
+    const error = validateAccountName(accountName, [], t, k);
+    if (error) {
+      alert(error);
+      return;
+    }
+
     setIsLoading(true);
 
     try {
       if ((window as any).electronAPI) {
-        const newAccounts = [{ id: 'account_1', name: accountName.trim() }];
+        const newAccounts = [{ id: sanitized, name: sanitized }];
         const accounts = await (window as any).electronAPI.completeFirstBoot(newAccounts);
         onComplete(accounts);
       } else {
-        onComplete([{ id: 'account_1', name: accountName.trim() }]);
+        onComplete([{ id: sanitized, name: sanitized }]);
       }
     } catch (e) {
       console.error(e);
