@@ -153,7 +153,7 @@ class SettingsManager {
       if (mainWindow) {
         mainWindow.setResizable(true);
         mainWindow.setMaximizable(true);
-        mainWindow.setMinimumSize(550, 500);
+        mainWindow.setMinimumSize(940, 600);
         mainWindow.setSize(1280, 720);
         mainWindow.center();
       }
