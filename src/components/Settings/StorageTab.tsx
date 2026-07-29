@@ -79,7 +79,6 @@ export default function StorageTab() {
         />
         <SettingsRow
           icon={<Warning size={20} weight="fill" />}
-          iconColor="monochrome"
           title={t(k.RESET_APP_TITLE) || "Reset App Data"}
           description={t(k.RESET_APP_DESC) || "Clear all sessions and return to first setup. Keeps media."}
           control={
