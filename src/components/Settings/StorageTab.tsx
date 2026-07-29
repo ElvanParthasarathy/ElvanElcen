@@ -87,7 +87,14 @@ export default function StorageTab() {
                 onClick={async () => {
                   if (window.confirm(t(k.RESET_APP_CONFIRM) || "Are you sure you want to reset all app data? This will log out all accounts but preserve your media folder.")) {
                     if ((window as any).electronAPI) {
-                      await (window as any).electronAPI.resetApp();
+                      try {
+                        const result = await (window as any).electronAPI.resetApp();
+                        if (result && !result.success) {
+                          alert("Reset App failed: " + result.error);
+                        }
+                      } catch (err: any) {
+                        alert("Reset App error: " + err.message);
+                      }
                     }
                   }
                 }}

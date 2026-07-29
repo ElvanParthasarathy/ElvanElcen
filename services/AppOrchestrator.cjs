@@ -54,6 +54,17 @@ class AppOrchestrator {
         const { session } = require('electron');
         const settings = this.settingsManager.getSettingsSync();
         
+        // 0. Remove active views so we can safely clear their session storage
+        try {
+          if (this.whatsAppViewManager) {
+            for (const acc of settings.accounts) {
+              this.whatsAppViewManager.removeView(acc.id);
+            }
+          }
+        } catch (e) {
+          console.error("Failed to remove views during reset:", e);
+        }
+
         // 1. Clear session storage for all existing accounts
         for (const acc of settings.accounts) {
           const accSession = session.fromPartition(`persist:${acc.id}`);
