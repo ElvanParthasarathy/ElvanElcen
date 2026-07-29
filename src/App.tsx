@@ -59,13 +59,13 @@ function App() {
     }
   }, [setLang]);
 
-  // Only attach WhatsApp view after splash finishes so it doesn't draw over the React splash screen
+  // Only attach WhatsApp view after splash finishes and not in first boot onboarding
   useEffect(() => {
-    if (!showSplash && (window as any).electronAPI) {
+    if (!showSplash && !isFirstBoot && (window as any).electronAPI) {
       const targetView = activeTab.startsWith('wa-') ? activeTab.replace('wa-', '') : activeTab;
       (window as any).electronAPI.switchTab(targetView);
     }
-  }, [showSplash, activeTab]);
+  }, [showSplash, activeTab, isFirstBoot]);
 
   // Listen for custom audio preview requests from Settings tab
   useEffect(() => {
