@@ -45,4 +45,4 @@ temp_logo.png
 # C# and Installer Output
 bin/
 obj/
-Assets/app_payload.zip
+**/Assets/app_payload.zip

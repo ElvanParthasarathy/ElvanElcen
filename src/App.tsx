@@ -132,6 +132,8 @@ function App() {
           setAccounts(newAccounts);
           setActiveTab(`wa-${newAccounts[0].id}`);
           setIsFirstBoot(false);
+          setShowSplash(true);
+          if (!isDevSplash) setTimeout(() => setShowSplash(false), 2500);
         }} />
       </ThemeProvider>
     );

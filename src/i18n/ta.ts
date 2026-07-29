@@ -221,6 +221,61 @@ export const ta = {
     latn: 'Thamizh Malaiyaala Ezhuthuruvil',
     ml: 'തമിഴ് മലൈയാള എഴുത്തുരുവിൽ',
   },
+  [k.OB_SELECT_LANG]: {
+    ta: 'மொழியைத் தேர்வு செய்க',
+    latn: 'Mozhiyath Thaervu Cheyga',
+    ml: 'മൊഴിയൈ ത്തേർവു ചെയ്ക',
+  },
+  [k.OB_SELECT_LANG_SUB]: {
+    ta: 'உங்கள் மொழியைத் தேர்ந்தெடுக்கவும்',
+    latn: 'Ungal mozhiyaith thaerndhedukkavum',
+    ml: 'ഉങ്കൾ മൊഴിയൈ ത്തേർന്തെടുക്കവും',
+  },
+  [k.OB_CONTINUE]: {
+    ta: 'தொடரவும்',
+    latn: 'Thodaravum',
+    ml: 'തൊടരവും',
+  },
+  [k.OB_SETUP_SUB]: {
+    ta: 'முதல் கணக்கை அமைப்போம். பிறகு கூடுதல் கணக்குகளைச் சேர்க்கலாம்.',
+    latn: 'Mudhal kanakkai amaippoam. Piragu koodudhal kanakkugalai chaerkkalam.',
+    ml: 'മുതൽ കണക്കൈ അമൈപ്പോം. പിറകു കൂടുതൽ കണക്കുകളൈ ച്ചേർക്കലാം.',
+  },
+  [k.OB_ACCOUNT_NAME]: {
+    ta: 'கணக்கு பெயர்',
+    latn: 'Kanakku peyar',
+    ml: 'കണക്കിൻ പെയർ',
+  },
+  [k.OB_ACCOUNT_PLACEHOLDER]: {
+    ta: 'தனிப்பட்டது',
+    latn: 'Thanippattadhu',
+    ml: 'തനിപ്പട്ടതു',
+  },
+  [k.OB_MEDIA_LOC]: {
+    ta: 'ஊடக சேமிப்பகம்',
+    latn: 'Oodagach chaemippagam',
+    ml: 'ഊടക ച്ചേമിപ്പകം',
+  },
+  [k.OB_MEDIA_LOC_SUB]: {
+    ta: 'பதிவிறக்கப்படும் படங்கள், நிகழ்ப்படங்கள் இங்கு சேமிக்கப்படும்.',
+    latn: 'Padhivirakkappadum padangal, Nigazhppadangal ingu semikkappadum.',
+    ml: 'പതിവിറക്കപ്പടും പടങ്കൾ, നികഴ്പ്പടങ്കൾ ഇങ്കു ചേമിക്കപ്പടും.',
+  },
+  [k.OB_BROWSE]: {
+    ta: 'உலாவு',
+    latn: 'Ulaavu',
+    ml: 'ഉലാവു',
+  },
+  [k.OB_SETTING_UP]: {
+    ta: 'அமைக்கப்படுகிறது...',
+    latn: 'Amaikkappadugiradhu...',
+    ml: 'അമൈക്കപ്പടുകിറതു...',
+  },
+  [k.OB_GET_STARTED]: {
+    ta: 'தொடங்கு',
+    latn: 'Thodangu',
+    ml: 'തൊടങ്കു',
+  },
   [k.AUTO_ORG_TITLE]: {
     ta: 'தானாக ஒழுங்கமை',
     latn: 'Thaanaaga ozhungamai',

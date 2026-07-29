@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, TextField, Button, Paper, useTheme, InputAdornment, CircularProgress } from '@mui/material';
-import { FolderOpen, User, CheckCircle } from '@phosphor-icons/react';
+import { Box, Button, IconButton } from '@mui/material';
+import { FolderOpen, User, CaretLeft } from '@phosphor-icons/react';
+import { OnboardingLayout, OnboardingHeader, OnboardingInput, OnboardingButton } from './OnboardingComponents';
+import WelcomePhase from './WelcomePhase';
+import { useI18n } from '../../i18n/I18nContext';
+import { k } from '../../i18n/k';
+import NammilLogo from '../../assets/nammil_outline.webp';
 
 interface OnboardingProps {
   onComplete: (accounts: any[]) => void;
 }
 
 const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
-  const theme = useTheme();
+  const { t } = useI18n();
+  const [step, setStep] = useState<'welcome' | 'setup'>('welcome');
+  const [hasSeenGreeting, setHasSeenGreeting] = useState(false);
   const [accountName, setAccountName] = useState('Personal');
   const [mediaFolder, setMediaFolder] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +46,6 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
         const accounts = await (window as any).electronAPI.completeFirstBoot(newAccounts, mediaFolder);
         onComplete(accounts);
       } else {
-        // Fallback for browser testing
         onComplete([{ id: 'account_1', name: accountName.trim() }]);
       }
     } catch (e) {
@@ -49,114 +55,177 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
   };
 
   return (
-    <Box
-      sx={{
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: theme.palette.mode === 'dark'
-          ? 'linear-gradient(135deg, #0b141a 0%, #111b21 100%)'
-          : 'linear-gradient(135deg, #f0f2f5 0%, #e9edef 100%)',
-        WebkitAppRegion: 'drag',
-      }}
-    >
-      <Paper
-        elevation={24}
-        sx={{
-          p: 6,
-          borderRadius: 4,
-          maxWidth: 500,
-          width: '90%',
-          textAlign: 'center',
-          WebkitAppRegion: 'no-drag',
-          background: theme.palette.mode === 'dark' ? 'rgba(32, 44, 51, 0.95)' : 'rgba(255, 255, 255, 0.95)',
-          backdropFilter: 'blur(10px)',
-          border: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
-        }}
-      >
-        <img 
-          src="./app_icon.png" 
-          alt="Elvan Nammil" 
-          style={{ width: 96, height: 96, marginBottom: 24, filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.2))' }} 
+    <>
+      <div style={{ display: step === 'welcome' ? 'block' : 'none', height: '100%' }}>
+        <WelcomePhase 
+            skipGreeting={hasSeenGreeting} 
+            onContinue={() => {
+                setHasSeenGreeting(true);
+                setStep('setup');
+            }} 
         />
-        
-        <Typography variant="h4" fontWeight={700} gutterBottom sx={{ color: theme.palette.text.primary }}>
-          Welcome to Elvan Nammil
-        </Typography>
-        
-        <Typography variant="body1" sx={{ color: theme.palette.text.secondary, mb: 4 }}>
-          Let's set up your very first workspace. You can always add more accounts or change these settings later.
-        </Typography>
+      </div>
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, textAlign: 'left' }}>
-          <TextField
-            fullWidth
-            label="Account Name"
-            variant="outlined"
-            value={accountName}
-            onChange={(e) => setAccountName(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <User size={20} color={theme.palette.text.secondary} />
-                </InputAdornment>
-              ),
+      <div style={{ display: step === 'setup' ? 'block' : 'none', height: '100%' }}>
+        <OnboardingLayout maxWidth="md">
+        {/* Back Button positioned exactly in the top-left corner like native window controls */}
+        <IconButton 
+            onClick={() => setStep('welcome')}
+            sx={{ 
+                position: 'fixed',
+                top: 8,
+                left: 8,
+                color: 'var(--onboarding-text-secondary)', 
+                transition: 'color 0.2s',
+                '&:hover': { color: 'var(--onboarding-text)' },
+                zIndex: 10000,
+                WebkitAppRegion: 'no-drag'
             }}
-          />
-
-          <TextField
-            fullWidth
-            label="Media Storage Location"
-            variant="outlined"
-            value={mediaFolder}
-            InputProps={{
-              readOnly: true,
-              startAdornment: (
-                <InputAdornment position="start">
-                  <FolderOpen size={20} color={theme.palette.text.secondary} />
-                </InputAdornment>
-              ),
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Button variant="outlined" size="small" onClick={handleBrowse} sx={{ textTransform: 'none', borderRadius: 2 }}>
-                    Browse
-                  </Button>
-                </InputAdornment>
-              ),
-            }}
-            helperText="Where downloaded images, videos, and documents will be saved."
-          />
-        </Box>
-
-        <Button
-          fullWidth
-          variant="contained"
-          size="large"
-          color="primary"
-          onClick={handleStart}
-          disabled={isLoading || !accountName.trim() || !mediaFolder.trim()}
-          sx={{ 
-            mt: 5, 
-            py: 1.5,
-            borderRadius: 3,
-            textTransform: 'none',
-            fontSize: '1.1rem',
-            fontWeight: 600,
-            boxShadow: '0 8px 16px rgba(0, 168, 132, 0.3)',
-            transition: 'all 0.2s',
-            '&:hover': {
-              transform: 'translateY(-2px)',
-              boxShadow: '0 12px 20px rgba(0, 168, 132, 0.4)',
-            }
-          }}
-          startIcon={isLoading ? <CircularProgress size={20} color="inherit" /> : <CheckCircle size={24} weight="fill" />}
         >
-          {isLoading ? 'Setting up...' : 'Get Started'}
-        </Button>
-      </Paper>
-    </Box>
+            <CaretLeft size={24} weight="bold" />
+        </IconButton>
+
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            maxWidth: '460px',
+            margin: '0 auto',
+            width: '100%',
+            position: 'relative',
+            padding: '24px 0' // Removed unwanted left/right padding and huge top/bottom
+        }}>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                alignItems: 'stretch',
+                gap: '24px' // Reduced gap to fit nicely
+            }}>
+                {/* Header section - Centered */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '12px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 0 }}>
+                        <div style={{ 
+                            width: 40,
+                            height: 40,
+                            backgroundColor: 'var(--onboarding-text)',
+                            WebkitMaskImage: `url(${NammilLogo})`,
+                            WebkitMaskSize: 'contain',
+                            WebkitMaskRepeat: 'no-repeat',
+                            WebkitMaskPosition: 'center',
+                            maskImage: `url(${NammilLogo})`,
+                            maskSize: 'contain',
+                            maskRepeat: 'no-repeat',
+                            maskPosition: 'center',
+                            marginRight: 0
+                        }} />
+                        <h1 style={{ 
+                            fontSize: '21px', 
+                            fontWeight: 'bold', 
+                            fontFamily: "'Elvan Sans', sans-serif",
+                            color: 'var(--onboarding-text)', 
+                            margin: 0, 
+                            letterSpacing: 0, 
+                            whiteSpace: 'nowrap'
+                        }}>
+                            {t(k.BRAND_NAME)}
+                        </h1>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <p style={{ fontSize: '14px', color: 'var(--onboarding-text-secondary)', margin: 0, fontWeight: '400', lineHeight: 1.4, maxWidth: '300px' }}>
+                            {t(k.OB_SETUP_SUB)}
+                        </p>
+                    </div>
+                </div>
+
+                {/* Form section */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
+                    <OnboardingInput
+                        label={t(k.OB_ACCOUNT_NAME)}
+                        value={accountName}
+                        onChange={(e: any) => setAccountName(e.target.value)}
+                        placeholder={t(k.OB_ACCOUNT_PLACEHOLDER)}
+                        startIcon={<User size={20} />}
+                    />
+                    
+                    <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                        <div style={{ 
+                            fontSize: '12px', 
+                            fontWeight: 500, 
+                            color: 'var(--onboarding-text-secondary)', 
+                            marginBottom: '8px',
+                            marginLeft: '16px',
+                            textAlign: 'left'
+                        }}>
+                            {t(k.OB_MEDIA_LOC)}
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '12px', width: '100%' }}>
+                            <div style={{ 
+                                flex: 1, 
+                                display: 'flex', 
+                                alignItems: 'center', 
+                                gap: '10px',
+                                backgroundColor: 'var(--onboarding-input-bg)',
+                                borderRadius: '24px',
+                                height: 48,
+                                boxSizing: 'border-box',
+                                padding: '0 16px', // horizontal padding only, vertical handled by flex
+                                overflow: 'hidden'
+                            }}>
+                                <span style={{ 
+                                    fontSize: '14px', 
+                                    color: 'var(--onboarding-text)',
+                                    whiteSpace: 'nowrap',
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    fontFamily: 'monospace',
+                                    marginTop: '2px' // optical alignment for monospace font
+                                }}>
+                                    {mediaFolder}
+                                </span>
+                            </div>
+                            <IconButton 
+                                onClick={handleBrowse}
+                                sx={{ 
+                                    bgcolor: 'var(--onboarding-input-bg)',
+                                    color: 'var(--onboarding-text)',
+                                    width: 48,
+                                    height: 48,
+                                    flexShrink: 0,
+                                    '&:hover': {
+                                        bgcolor: 'rgba(255, 255, 255, 0.1)'
+                                    }
+                                }}
+                            >
+                                <FolderOpen size={20} weight="fill" />
+                            </IconButton>
+                        </div>
+                    </div>
+
+                    <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <OnboardingButton onClick={handleStart} loading={isLoading}>
+                            {t(k.OB_GET_STARTED)}
+                        </OnboardingButton>
+                        <div style={{
+                            fontSize: '11px',
+                            color: 'var(--onboarding-text-muted)',
+                            marginTop: '12px',
+                            textAlign: 'center',
+                            opacity: 0.6,
+                            whiteSpace: 'nowrap',
+                            lineHeight: 1.4
+                        }}>
+                            {t(k.OB_MEDIA_LOC_SUB)}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </OnboardingLayout>
+      </div>
+    </>
   );
 };
 

@@ -1,0 +1,209 @@
+/* =========================================
+   ONBOARDING THEME VARIABLES (Kotlin Port)
+   ========================================= */
+:root {
+    --onboarding-bg: #FAFAFA;
+    --onboarding-surface: #FFFFFF;
+    --onboarding-text: #1A1A1A;
+    --onboarding-text-secondary: #666666;
+    --onboarding-text-muted: #999999;
+    --onboarding-input-bg: #FFFFFF;
+    --onboarding-shape: #EAEAEA;
+    --onboarding-accent: #111111;
+    --onboarding-accent-light: #333333;
+    --onboarding-divider: #E0E0E0;
+    --onboarding-danger: #EF5350;
+    --onboarding-glow: rgba(0, 0, 0, 0.08);
+    --onboarding-btn-shadow: rgba(0, 0, 0, 0.25);
+    --onboarding-btn-text: #FFFFFF;
+}
+
+.onboarding-container.dark {
+    --onboarding-bg: #0A0A0A;
+    --onboarding-surface: #1A1A1A;
+    --onboarding-text: #FFFFFF;
+    --onboarding-text-secondary: rgba(255, 255, 255, 0.6);
+    --onboarding-text-muted: rgba(255, 255, 255, 0.4);
+    --onboarding-input-bg: #1E1E1E;
+    --onboarding-shape: rgba(255, 255, 255, 0.03);
+    --onboarding-accent: #FFFFFF;
+    --onboarding-divider: rgba(255, 255, 255, 0.1);
+    --onboarding-glow: rgba(255, 255, 255, 0.15);
+    --onboarding-btn-shadow: rgba(0, 0, 0, 0.5);
+    --onboarding-btn-text: #000000;
+}
+
+.onboarding-logo-themed {
+    transition: filter 0.3s ease;
+}
+
+html.dark .onboarding-logo-themed, html[data-theme="dark"] .onboarding-logo-themed {
+    filter: invert(1) brightness(100%);
+}
+
+/* =========================================
+   ONBOARDING GRADIENT BACKGROUND
+   ========================================= */
+.onboarding-container {
+    position: fixed;
+    inset: 0;
+    z-index: 10010;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--onboarding-bg);
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-app-region: drag;
+}
+
+.onboarding-container::-webkit-scrollbar {
+    display: none;
+}
+
+.onboarding-content {
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    -webkit-app-region: no-drag;
+}
+
+/* Floating Shapes */
+.onboarding-shape {
+    position: absolute;
+    background-color: var(--onboarding-shape);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* 1. Large Rounded Square (Top Right) */
+.shape-1 {
+    top: 2%;
+    right: -10%;
+    width: 50vw;
+    height: 50vw;
+    border-radius: 80px;
+    animation: rotate1 60s linear infinite;
+    transform-origin: 85% 15%;
+}
+
+/* 2. Circle (Bottom Left) */
+.shape-2 {
+    bottom: 5%;
+    left: -10%;
+    width: 70vw;
+    height: 70vw;
+    border-radius: 50%;
+    animation: float 4s ease-in-out infinite alternate;
+}
+
+/* 3. Small Rounded Square (Top Left) */
+.shape-3 {
+    top: 15%;
+    left: 5%;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 30px;
+    animation: rotate2 40s linear infinite reverse;
+}
+
+/* 4. Small Circle (Center Right) */
+.shape-4 {
+    top: 60%;
+    right: 10%;
+    width: 15vw;
+    height: 15vw;
+    border-radius: 50%;
+    animation: float 5s ease-in-out infinite alternate-reverse;
+}
+
+/* Animations */
+@keyframes rotate1 {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes rotate2 {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(30px); }
+}
+
+/* =========================================
+   COMPONENTS
+   ========================================= */
+
+/* Header */
+.onboarding-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.onboarding-title {
+    font-size: clamp(22px, 6vw, 36px);
+    font-weight: 800;
+    color: var(--onboarding-text);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.onboarding-subtitle {
+    font-size: 16px;
+    color: var(--onboarding-text-secondary);
+    font-weight: 400;
+}
+
+/* Input */
+.onboarding-field {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.onboarding-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--onboarding-text-secondary);
+    margin-bottom: 8px;
+    padding-left: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Error Text */
+.onboarding-error {
+    color: var(--onboarding-danger);
+    font-size: 12px;
+    margin-top: 4px;
+    padding-left: 16px;
+}
+
+/* Animations */
+.animate-enter {
+    animation: enterFade 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes enterFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }

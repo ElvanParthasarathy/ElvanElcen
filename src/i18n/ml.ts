@@ -216,6 +216,61 @@ export const ml = {
     latn: 'Thamizh Malayaala Lipiyil',
     ta: 'தமிழ் மலயாள லிப்பியில்',
   },
+  [k.OB_SELECT_LANG]: {
+    ml: 'മൊഴി തിരഞ്ഞെടുക്കുക',
+    latn: 'Mozhi thiranjedukkuka',
+    ta: 'மொழி திரஞ்ஞெடுக்குக',
+  },
+  [k.OB_SELECT_LANG_SUB]: {
+    ml: 'നിങ്ങളുടെ മൊഴി തിരഞ്ഞെടുക്കുക',
+    latn: 'Ningalude Mozhi thirenjedukkuka',
+    ta: 'நிங்ஙளுடெ மொழி திரஞ்ஞெடுக்குக',
+  },
+  [k.OB_CONTINUE]: {
+    ml: 'തുടരുക',
+    latn: 'Thudaruka',
+    ta: 'துடருக',
+  },
+  [k.OB_SETUP_SUB]: {
+    ml: 'ആദ്യ അക്കൗണ്ട് സജ്ജമാക്കാം. കൂടുതൽ അക്കൗണ്ടുകൾ പിന്നീട് ചേർക്കാം.',
+    latn: 'Aadhya account sajjamaakkam. Kooduthal accountukal pinneedu cherkkaam.',
+    ta: 'ஆத்ய அக்கௌண்ட் ஸஜ்ஜமாக்காம். கூடுதல் அக்கௌண்டுகள் பின்னீடு சேர்க்காம்.',
+  },
+  [k.OB_ACCOUNT_NAME]: {
+    ml: 'അക്കൗണ്ട് പേര്',
+    latn: 'Account peru',
+    ta: 'அக்கௌண்ட் பேரு',
+  },
+  [k.OB_ACCOUNT_PLACEHOLDER]: {
+    ml: 'വ്യക്തിഗതം',
+    latn: 'Vyakthigatham',
+    ta: 'வ்யக்திகதம்',
+  },
+  [k.OB_MEDIA_LOC]: {
+    ml: 'മീഡിയ സ്റ്റോറേജ്',
+    latn: 'Media storage',
+    ta: 'மீடியா ஸ்டோறேஜ்',
+  },
+  [k.OB_MEDIA_LOC_SUB]: {
+    ml: 'ഡൗൺലോഡ് ചെയ്യുന്ന ഫയലുകൾ ഇവിടെ സൂക്ഷിക്കും.',
+    latn: 'Download cheyyunna file-ukal ivide sookshikkum.',
+    ta: 'டௌன்லோட் செய்யுன்ன ஃபயலுகள் இவிடெ ஸூக்ஷிக்கும்.',
+  },
+  [k.OB_BROWSE]: {
+    ml: 'ബ്രൗസ്',
+    latn: 'Browse',
+    ta: 'ப்ரௌஸ்',
+  },
+  [k.OB_SETTING_UP]: {
+    ml: 'സജ്ജമാക്കുന്നു...',
+    latn: 'Sajjamaakkunnu...',
+    ta: 'ஸஜ்ஜமாக்குன்னு...',
+  },
+  [k.OB_GET_STARTED]: {
+    ml: 'ആരംഭിക്കുക',
+    latn: 'Aarambhikkuka',
+    ta: 'ஆரம்பிக்குக',
+  },
   [k.AUTO_ORG_TITLE]: {
     ml: 'തനിയെ ക്രമീകരിക്കുക',
     latn: 'Thaniye krameekarikkuka',

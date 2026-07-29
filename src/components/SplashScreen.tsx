@@ -4,6 +4,8 @@ import { useI18n } from '../i18n/I18nContext';
 import { getTheme } from '../theme';
 import NammilLogo from '../assets/nammil_outline.webp';
 
+import './Onboarding/Onboarding.css';
+
 // Brand name in each script
 const BRAND_NAMES: Record<string, string> = {
   ta: 'எல்வன் நம்மில்',
@@ -60,68 +62,72 @@ export default function SplashScreen({ userTheme }: { userTheme: string }) {
   const currentName = BRAND_NAMES[order[nameIndex]] || BRAND_NAMES['en'];
 
   return (
-    <Box 
-      sx={{ 
-        width: '100vw', 
-        height: '100vh', 
-        display: 'flex', 
-        flexDirection: 'row',
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        bgcolor: actualMode === 'dark' ? '#1d1f1f' : '#F7F5F3',
-        color: actualMode === 'dark' ? '#FFFFFF' : theme.palette.text.primary,
-        WebkitAppRegion: 'drag',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        zIndex: 9999,
-      }}
-    >
-      {/* Logo — always visible */}
+    <div className={`onboarding-container ${actualMode === 'dark' ? 'dark' : ''}`}>
+      <div className="onboarding-shape shape-1" />
+      <div className="onboarding-shape shape-2" />
+      <div className="onboarding-shape shape-3" />
+      <div className="onboarding-shape shape-4" />
+      
       <Box 
         sx={{ 
-          width: 75,
-          height: 75,
-          mr: 0,
-          flexShrink: 0,
-          transform: 'translateZ(0)',
-          willChange: 'transform',
-          bgcolor: contentColor,
-          WebkitMaskImage: `url(${NammilLogo})`,
-          WebkitMaskSize: 'contain',
-          WebkitMaskRepeat: 'no-repeat',
-          WebkitMaskPosition: 'center',
-          maskImage: `url(${NammilLogo})`,
-          maskSize: 'contain',
-          maskRepeat: 'no-repeat',
-          maskPosition: 'center',
-        }} 
-      />
-
-      {/* App name — fast cycle through languages, stops on last */}
-      <Box 
-        sx={{ 
-          width: currentName.includes('നമ്മിൽ') ? '320px' : currentName.includes('நம்மில்') ? '290px' : '260px', 
+          width: '100vw', 
+          height: '100vh', 
           display: 'flex', 
-          justifyContent: 'flex-start',
-          transition: 'width 0.25s ease-in-out'
+          flexDirection: 'row',
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          color: actualMode === 'dark' ? '#FFFFFF' : theme.palette.text.primary,
+          position: 'relative',
+          zIndex: 10000,
+          pointerEvents: 'none'
         }}
       >
-        <Typography 
-          fontWeight="bold" 
+        {/* Logo — always visible */}
+        <Box 
           sx={{ 
-            fontSize: '40px',
-            letterSpacing: 0,
-            fontFamily: "'Elvan Sans', sans-serif",
-            color: contentColor,
-            opacity: visible ? 1 : 0,
-            transition: 'opacity 0.25s ease-in-out',
-            whiteSpace: 'nowrap',
+            width: 75,
+            height: 75,
+            mr: 0,
+            flexShrink: 0,
+            transform: 'translateZ(0)',
+            willChange: 'transform',
+            bgcolor: contentColor,
+            WebkitMaskImage: `url(${NammilLogo})`,
+            WebkitMaskSize: 'contain',
+            WebkitMaskRepeat: 'no-repeat',
+            WebkitMaskPosition: 'center',
+            maskImage: `url(${NammilLogo})`,
+            maskSize: 'contain',
+            maskRepeat: 'no-repeat',
+            maskPosition: 'center',
+          }} 
+        />
+
+        {/* App name — fast cycle through languages, stops on last */}
+        <Box 
+          sx={{ 
+            width: currentName.includes('നമ്മിൽ') ? '320px' : currentName.includes('நம்மில்') ? '290px' : '260px', 
+            display: 'flex', 
+            justifyContent: 'flex-start',
+            transition: 'width 0.25s ease-in-out'
           }}
         >
-          {currentName}
-        </Typography>
+          <Typography 
+            fontWeight="bold" 
+            sx={{ 
+              fontSize: '40px',
+              letterSpacing: 0,
+              fontFamily: "'Elvan Sans', sans-serif",
+              color: contentColor,
+              opacity: visible ? 1 : 0,
+              transition: 'opacity 0.25s ease-in-out',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {currentName}
+          </Typography>
+        </Box>
       </Box>
-    </Box>
+    </div>
   );
 }
