@@ -16,6 +16,13 @@ export default function WelcomePhase({ onContinue, skipGreeting }: { onContinue:
     const [greetingOpacity, setGreetingOpacity] = useState(0);
     const [showLanguage, setShowLanguage] = useState(false);
 
+    const handleLanguageSelect = (code: string) => {
+        setLang(code);
+        if ((window as any).electronAPI) {
+            (window as any).electronAPI.saveSetting('language', code);
+        }
+    };
+
     useEffect(() => {
         let loopCount = 0;
         let isMounted = true;
@@ -219,7 +226,7 @@ export default function WelcomePhase({ onContinue, skipGreeting }: { onContinue:
                                     <React.Fragment key={l.code}>
                                         <ListItem disablePadding>
                                             <ListItemButton 
-                                                onClick={() => setLang(l.code)} 
+                                                onClick={() => handleLanguageSelect(l.code)} 
                                                 sx={{ py: 1, px: 3, bgcolor: 'transparent', '@media (hover: hover)': { '&:hover': { bgcolor: 'transparent' } } }}
                                                 disableRipple
                                             >
