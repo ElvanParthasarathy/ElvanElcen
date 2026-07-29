@@ -419,7 +419,7 @@ export const ta = {
   [k.RESET_APP_DESC]: {
     ta: 'எல்லா தரவையும் அழித்து புதிதாகத் தொடங்கு. ஊடகத் தரவுகள் அழியாது.',
     latn: 'Ella tharavaiyum azhithu pudhidhaagath thodangu. Oodagath tharavugal azhiyaadhu.',
-    ml: 'എല്ലാ തരവൈയും അഴിത്തു പുതിതാകാ ത്തൊടങ്കു. ഊടക ത്തരവുകൾ അഴിയാതു.',
+    ml: 'എല്ലാ തരവൈയും അഴിത്തു പുതിതാക ത്തൊടങ്കു. ഊടക ത്തരവുകൾ അഴിയാതു.',
   },
   [k.RESET_APP_BTN]: {
     ta: 'அழி',
