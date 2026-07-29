@@ -17,7 +17,7 @@ class SettingsManager {
 
   getSettingsSync() {
     let defaultSettings = { 
-      language: 'en', 
+      language: 'system', 
       theme: 'system',
       autoOrganize: true, 
       duplicateAction: 'skip',

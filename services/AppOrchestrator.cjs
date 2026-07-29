@@ -81,7 +81,7 @@ class AppOrchestrator {
         const mediaFolderPath = settings.mediaFolderPath;
         
         const defaultSettings = { 
-          language: 'en', 
+          language: 'system', 
           theme: 'system',
           autoOrganize: true, 
           duplicateAction: 'skip',
