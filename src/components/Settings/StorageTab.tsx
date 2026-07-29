@@ -99,10 +99,10 @@ export default function StorageTab() {
                   }
                 }}
                 sx={{ 
-                  bgcolor: 'rgba(244, 67, 54, 0.1)', 
-                  color: '#F44336',
+                  bgcolor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)', 
+                  color: 'var(--mac-text)',
                   '&:hover': {
-                    bgcolor: 'rgba(244, 67, 54, 0.2)',
+                    bgcolor: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.1)',
                   }
                 }}
               >
