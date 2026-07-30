@@ -26,6 +26,23 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'nammil', privileges: { standard: true, secure: true, supportFetchAPI: true, bypassCSP: true, corsEnabled: true, stream: true } }
 ]);
 
+// 3.5. Read settings to force global browser language
+const fs = require('fs');
+try {
+  const settingsPath = path.join(app.getPath('userData'), 'nammil-settings.json');
+  if (fs.existsSync(settingsPath)) {
+    const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+    if (settings.language && settings.language !== 'system') {
+      let langCode = 'en-US';
+      if (settings.language.startsWith('ta')) langCode = 'ta';
+      else if (settings.language.startsWith('ml')) langCode = 'ml';
+      app.commandLine.appendSwitch('lang', langCode);
+    }
+  }
+} catch (e) {
+  console.error('[Nammil] Early language sync failed:', e);
+}
+
 let orchestrator = null;
 
 // 4. Handle second-instance launch (bring running Nammil instance to front)

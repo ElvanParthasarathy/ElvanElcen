@@ -108,10 +108,14 @@ function App() {
     }
   }, []);
 
-  // Sync notifications to localStorage
+  // Sync notifications to localStorage and taskbar badge
   useEffect(() => {
     try {
       localStorage.setItem('nammil-notifications', JSON.stringify(notifications));
+      if ((window as any).electronAPI && (window as any).electronAPI.setTaskbarBadge) {
+        const unreadCount = notifications.filter(n => !n.read).length;
+        (window as any).electronAPI.setTaskbarBadge(unreadCount);
+      }
     } catch {}
   }, [notifications]);
 
@@ -180,15 +184,54 @@ function App() {
                   }
                 }}
                 onAddDevTestNotification={() => {
-                  setNotifications((prev) => [{
-                    id: Date.now().toString(),
-                    title: 'New Message',
-                    body: 'This is a test notification.',
-                    accountName: accounts[0]?.name || 'Unknown',
-                    accountId: accounts[0]?.id || 'unknown',
-                    timestamp: new Date().toISOString(),
-                    read: false,
-                  }, ...prev]);
+                  const now = Date.now();
+                  const acc1 = accounts[0] || { id: 'acc1', name: 'Personal' };
+                  const acc2 = accounts[1] || { id: 'acc2', name: 'Work' };
+                  
+                  const testNotifs = [
+                    {
+                      id: `dev-${now}-1`,
+                      title: 'Elvan',
+                      body: 'Hey! Could you review the latest PR? There is a massive refactor in the core module that touches the database synchronization logic, and we really need to make sure it doesn\'t break anything in production before our big launch tomorrow. Let me know what you think!',
+                      accountName: acc1.name,
+                      accountId: acc1.id,
+                      timestamp: now,
+                    },
+                    {
+                      id: `dev-${now}-2`,
+                      title: 'Project Group',
+                      body: 'Who is taking the notes today?',
+                      accountName: acc1.name,
+                      accountId: acc1.id,
+                      timestamp: now - 60000,
+                    },
+                    {
+                      id: `dev-${now}-3`,
+                      title: 'Project Group',
+                      body: 'I can do it!',
+                      accountName: acc1.name,
+                      accountId: acc1.id,
+                      timestamp: now - 120000,
+                    },
+                    {
+                      id: `dev-${now}-4`,
+                      title: 'Project Group',
+                      body: 'Thanks 🙏',
+                      accountName: acc1.name,
+                      accountId: acc1.id,
+                      timestamp: now - 180000,
+                    },
+                    {
+                      id: `dev-${now}-5`,
+                      title: 'Client',
+                      body: 'Approved.',
+                      accountName: acc2.name,
+                      accountId: acc2.id,
+                      timestamp: now - 3600000,
+                    },
+                  ];
+
+                  setNotifications((prev) => [...testNotifs, ...prev].slice(0, 200));
                 }}
               />
             </Box>

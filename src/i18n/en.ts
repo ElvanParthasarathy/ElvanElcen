@@ -162,14 +162,14 @@ export const en = {
 
   // Time periods
 
-  [k.TIME_AM]: '',
-  [k.TIME_PM]: '',
-  [k.TIME_MIDNIGHT]: '',
-  [k.TIME_EARLY_MORNING]: '',
-  [k.TIME_MORNING]: '',
-  [k.TIME_AFTERNOON]: '',
-  [k.TIME_EVENING]: '',
-  [k.TIME_NIGHT]: '',
+  [k.TIME_AM]: 'AM',
+  [k.TIME_PM]: 'PM',
+  [k.TIME_MIDNIGHT]: 'Midnight',
+  [k.TIME_EARLY_MORNING]: 'Early Morning',
+  [k.TIME_MORNING]: 'Morning',
+  [k.TIME_AFTERNOON]: 'Afternoon',
+  [k.TIME_EVENING]: 'Evening',
+  [k.TIME_NIGHT]: 'Night',
   [k.NOTIF_PAGE_TITLE]: 'Notifications',
   [k.NOTIF_SIDEBAR_ALL]: 'All Accounts',
   [k.NOTIF_PLURAL]: 'notifications',

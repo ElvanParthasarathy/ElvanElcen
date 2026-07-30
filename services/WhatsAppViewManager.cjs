@@ -21,6 +21,14 @@ class WhatsAppViewManager {
       }
     });
 
+    const settings = this.orchestrator.settingsManager.getSettingsSync();
+    if (settings.language && settings.language !== 'system') {
+      let langCode = 'en-US';
+      if (settings.language.startsWith('ta')) langCode = 'ta';
+      else if (settings.language.startsWith('ml')) langCode = 'ml';
+      view.webContents.session.setAcceptLanguages([langCode, 'en-US', 'en']);
+    }
+
     view.webContents.setUserAgent(USER_AGENT);
     view.webContents.loadURL(WHATSAPP_URL);
 

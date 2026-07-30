@@ -58,4 +58,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.on('nammil-received-notification', handler);
     return () => ipcRenderer.removeListener('nammil-received-notification', handler);
   },
+  setTaskbarBadge: (count) => ipcRenderer.send('set-taskbar-badge', count),
 });

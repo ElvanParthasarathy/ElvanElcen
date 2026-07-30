@@ -46,3 +46,4 @@ temp_logo.png
 bin/
 obj/
 **/Assets/app_payload.zip
+build-release/

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar, Box, IconButton, Paper, Stack, Typography } from '@mui/material';
-import { ChatCircle, Trash } from '@phosphor-icons/react';
+import { ChatCircle, X } from '@phosphor-icons/react';
 import { NotificationItem } from './index';
 
 interface NotificationSingleProps {
@@ -9,6 +9,7 @@ interface NotificationSingleProps {
   formatTime: (ts: number) => string;
   onSelectNotification: (item: NotificationItem) => void;
   onClearSingle?: (id: string) => void;
+  isRemoving?: boolean;
 }
 
 export default function NotificationSingle({
@@ -17,9 +18,10 @@ export default function NotificationSingle({
   formatTime,
   onSelectNotification,
   onClearSingle,
+  isRemoving,
 }: NotificationSingleProps) {
   return (
-    <Paper
+      <Paper
       elevation={0}
       onClick={() => onSelectNotification(item)}
       sx={{
@@ -30,11 +32,15 @@ export default function NotificationSingle({
         bgcolor: isDark ? '#2a2b2c' : '#FFFFFF',
         border: 'none',
         cursor: 'pointer',
+        transform: isRemoving ? 'translateX(-100%)' : 'none',
+        opacity: isRemoving ? 0 : 1,
         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         position: 'relative',
+        '& .action-btn': { opacity: 0, transition: 'opacity 0.2s ease', pointerEvents: 'none' },
         '&:hover': {
-          bgcolor: isDark ? '#323334' : '#f5f5f5',
+          bgcolor: isDark ? '#323334' : '#eaeaea',
         },
+        '&:hover .action-btn': { opacity: 1, pointerEvents: 'auto' },
       }}
     >
       <Stack direction="row" spacing={2} alignItems="flex-start">
@@ -85,24 +91,23 @@ export default function NotificationSingle({
           </Box>
         </Stack>
         
-        {/* Right side icons (Trash, if any) */}
-        <Stack direction="row" alignItems="center" spacing={1} sx={{ pl: 1, pt: 1 }}>
-          
-          {/* Trash button (only if standalone card) */}
+        {/* Right side icons (X) */}
+        <Stack direction="row" alignItems="center" spacing={1} sx={{ pl: 1, alignSelf: 'center' }}>
           {onClearSingle && (
             <IconButton
               size="small"
+              className="action-btn"
               onClick={(e) => {
                 e.stopPropagation();
                 onClearSingle(item.id);
               }}
               sx={{
-                color: 'text.secondary',
+                color: isDark ? '#888' : '#aaa',
                 p: 0.5,
-                '&:hover': { color: 'error.main', bgcolor: 'error.lighter' },
+                '&:hover': { color: isDark ? '#fff' : '#111', bgcolor: 'transparent' },
               }}
             >
-              <Trash size={16} />
+              <X size={16} weight="bold" />
             </IconButton>
           )}
         </Stack>

@@ -151,6 +151,12 @@ class NotificationManager {
       const s = this.orchestrator.settingsManager.getSettingsSync();
       this.playNotificationSound(soundType, s.customSoundPath);
     });
+
+    ipcMain.on('set-taskbar-badge', (event, count) => {
+      if (this.app.setBadgeCount) {
+        this.app.setBadgeCount(count);
+      }
+    });
   }
 }
 

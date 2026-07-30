@@ -9,7 +9,7 @@ class TrayManager {
   }
 
   createTray() {
-    const iconPath = path.join(__dirname, '..', 'src', 'assets', 'app_icon.ico');
+    const iconPath = path.join(__dirname, '..', 'build', 'icon.ico');
     this.tray = new Tray(nativeImage.createFromPath(iconPath));
     const trayMenu = Menu.buildFromTemplate([
       { 

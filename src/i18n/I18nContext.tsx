@@ -9,12 +9,14 @@ const dictionaries: Record<string, Record<string, string>> = {
 
 interface I18nContextProps {
   lang: string;
+  actualLang: string;
   setLang: (lang: string) => void;
   t: (key: string) => string;
 }
 
 const I18nContext = createContext<I18nContextProps>({
   lang: 'en',
+  actualLang: 'en',
   setLang: () => {},
   t: (key: string) => key
 });
@@ -61,7 +63,7 @@ export const I18nProvider = ({ children, initialLang = 'system' }: { children: R
   };
 
   return (
-    <I18nContext.Provider value={{ lang: userLang, setLang: setUserLang, t }}>
+    <I18nContext.Provider value={{ lang: userLang, actualLang, setLang: setUserLang, t }}>
       {children}
     </I18nContext.Provider>
   );

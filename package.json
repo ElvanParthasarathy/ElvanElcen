@@ -22,7 +22,7 @@
     "appId": "com.nammil.elvan",
     "productName": "Elvan Nammil",
     "directories": {
-      "output": "release"
+      "output": "build-release"
     },
     "files": [
       "dist/**/*",
@@ -30,7 +30,8 @@
       "preload.cjs",
       "package.json",
       "services/**/*",
-      "i18n/**/*"
+      "i18n/**/*",
+      "build/icon.ico"
     ],
     "win": {
       "icon": "build/icon.ico",

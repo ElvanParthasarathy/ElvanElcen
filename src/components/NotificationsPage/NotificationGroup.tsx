@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Avatar, Box, Collapse, IconButton, Paper, Stack, Typography } from '@mui/material';
-import { CaretDown, CaretUp, ChatCircle } from '@phosphor-icons/react';
+import { CaretDown, CaretUp, ChatCircle, X } from '@phosphor-icons/react';
 import { NotificationItem } from './index';
 import NotificationSingle from './NotificationSingle';
 
@@ -12,6 +12,9 @@ interface NotificationGroupProps {
   isDark: boolean;
   formatTime: (ts: number) => string;
   onSelectNotification: (item: NotificationItem) => void;
+  onClearSingle?: (id: string) => void;
+  onClearGroup?: (key: string) => void;
+  removingIds?: Set<string>;
 }
 
 export default function NotificationGroup({
@@ -22,6 +25,9 @@ export default function NotificationGroup({
   isDark,
   formatTime,
   onSelectNotification,
+  onClearSingle,
+  onClearGroup,
+  removingIds,
 }: NotificationGroupProps) {
   const latest = items[0];
   const [isTopCardExpanded, setIsTopCardExpanded] = useState(false);
@@ -45,6 +51,9 @@ export default function NotificationGroup({
             pl: 4, 
             pr: 4,
             cursor: 'pointer',
+            position: 'relative',
+            '& .header-action-btn': { opacity: 0, transition: 'opacity 0.2s ease', pointerEvents: 'none' },
+            '&:hover .header-action-btn': { opacity: 1, pointerEvents: 'auto' },
           }}
         >
           <Typography sx={{ fontSize: '14px', fontWeight: 600, color: 'text.secondary', lineHeight: 1, display: 'flex', alignItems: 'center', flex: 1 }}>
@@ -58,6 +67,7 @@ export default function NotificationGroup({
 
       {/* Main Top Card (Always visible) */}
       <Paper
+        key={latest.id}
         elevation={0}
         onClick={() => {
           if (!isExpanded) {
@@ -74,12 +84,16 @@ export default function NotificationGroup({
           bgcolor: isDark ? '#2a2b2c' : '#FFFFFF',
           border: 'none',
           cursor: 'pointer',
-          transition: 'background-color 0.2s ease',
+          transform: removingIds?.has(latest.id) ? 'translateX(-100%)' : 'none',
+          opacity: removingIds?.has(latest.id) ? 0 : 1,
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease',
           position: 'relative',
           zIndex: 2,
+          '& .action-btn': { opacity: 0, transition: 'opacity 0.2s ease', pointerEvents: 'none' },
           '&:hover': {
-            bgcolor: isDark ? '#323334' : '#f5f5f5',
+            bgcolor: isDark ? '#323334' : '#eaeaea',
           },
+          '&:hover .action-btn': { opacity: 1, pointerEvents: 'auto' },
         }}
       >
         <Stack direction="row" spacing={2} alignItems="center">
@@ -125,6 +139,28 @@ export default function NotificationGroup({
                 <CaretDown size={18} color={isDark ? '#888' : '#666'} />
               </>
             )}
+
+            {(onClearGroup || onClearSingle) && (
+              <IconButton
+                size="small"
+                className="action-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (isExpanded && onClearSingle) {
+                    onClearSingle(latest.id);
+                  } else if (onClearGroup) {
+                    onClearGroup(blockKey);
+                  }
+                }}
+                sx={{
+                  color: isDark ? '#888' : '#aaa',
+                  p: 0.5,
+                  '&:hover': { color: isDark ? '#fff' : '#111', bgcolor: 'transparent' },
+                }}
+              >
+                <X size={16} weight="bold" />
+              </IconButton>
+            )}
           </Stack>
         </Stack>
       </Paper>
@@ -137,6 +173,9 @@ export default function NotificationGroup({
           mt: -1.25,
           borderRadius: '0 0 24px 24px',
           bgcolor: isDark ? '#1f2021' : '#e0e0e0',
+          transform: removingIds?.has(latest.id) ? 'translateX(-100%)' : 'none',
+          opacity: removingIds?.has(latest.id) ? 0 : 1,
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
           position: 'relative',
           zIndex: 1,
         }} />
@@ -153,6 +192,8 @@ export default function NotificationGroup({
                 isDark={isDark}
                 formatTime={formatTime}
                 onSelectNotification={onSelectNotification}
+                onClearSingle={onClearSingle}
+                isRemoving={removingIds?.has(item.id)}
               />
             ))}
           </Stack>

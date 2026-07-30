@@ -41,9 +41,10 @@ export default function NotificationsPage({
   onAddDevTestNotification,
 }: NotificationsPageProps) {
   const isDark = useIsDark();
-  const { lang, t } = useI18n();
+  const { lang, actualLang, t } = useI18n();
   const [activeAccount, setActiveAccount] = useState<string>('All');
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
+  const [removingIds, setRemovingIds] = useState<Set<string>>(new Set());
   // Compute grouped counts for sidebar
   const groupedCounts: Record<string, number> = {
     All: notifications.length,
@@ -83,15 +84,57 @@ export default function NotificationsPage({
   renderBlocks.sort((a, b) => b.items[0].timestamp - a.items[0].timestamp);
 
   const formatTime = (ts: number) => {
-    return formatNeram(ts, lang, t);
+    return formatNeram(ts, actualLang, t);
   };
 
   const handleClearCurrent = () => {
-    if (activeAccount === 'All') {
-      onClearAll();
-    } else {
-      onClearAccount(activeAccount);
-    }
+    const allVisibleIds = renderBlocks.flatMap(block => block.items.map(i => i.id));
+    if (allVisibleIds.length === 0) return;
+
+    allVisibleIds.forEach((id, index) => {
+      setTimeout(() => {
+        setRemovingIds(prev => new Set(prev).add(id));
+      }, index * 40);
+    });
+
+    setTimeout(() => {
+      if (activeAccount === 'All') {
+        onClearAll();
+      } else {
+        onClearAccount(activeAccount);
+      }
+      setRemovingIds(new Set());
+    }, allVisibleIds.length * 40 + 300);
+  };
+
+  const handleClearGroup = (key: string) => {
+    const items = groupedNotifications[key] || [];
+    items.forEach((item, index) => {
+      setTimeout(() => {
+        setRemovingIds(prev => new Set(prev).add(item.id));
+      }, index * 40);
+    });
+
+    setTimeout(() => {
+      items.forEach(item => onClearSingle(item.id));
+      setRemovingIds(prev => {
+        const next = new Set(prev);
+        items.forEach(item => next.delete(item.id));
+        return next;
+      });
+    }, items.length * 40 + 300);
+  };
+
+  const handleClearSingle = (id: string) => {
+    setRemovingIds(prev => new Set(prev).add(id));
+    setTimeout(() => {
+      onClearSingle(id);
+      setRemovingIds(prev => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
+    }, 300);
   };
 
   const sidebarContent = (
@@ -216,6 +259,9 @@ export default function NotificationsPage({
                     isDark={isDark}
                     formatTime={formatTime}
                     onSelectNotification={onSelectNotification}
+                    onClearSingle={handleClearSingle}
+                    onClearGroup={handleClearGroup}
+                    removingIds={removingIds}
                   />
                 );
               }
@@ -229,7 +275,8 @@ export default function NotificationsPage({
                   isDark={isDark}
                   formatTime={formatTime}
                   onSelectNotification={onSelectNotification}
-                  onClearSingle={onClearSingle}
+                  onClearSingle={handleClearSingle}
+                  isRemoving={removingIds.has(item.id)}
                 />
               );
             })}

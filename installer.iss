@@ -2,7 +2,7 @@
 #define MyAppVersion "2.1.0"
 #define MyAppPublisher "Elvan Parthasarathy"
 #define MyAppExeName "Elvan Nammil.exe"
-#define MyOutputDir "release"
+#define MyOutputDir "build-release"
 #define MyAppURL "https://nammil.elvan.dev"
 #define MyAppId "com.nammil.elvan"
 
@@ -38,8 +38,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "release\win-unpacked\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "release\win-unpacked\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "build-release\win-unpacked\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "build-release\win-unpacked\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

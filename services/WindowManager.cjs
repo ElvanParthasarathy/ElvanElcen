@@ -22,6 +22,7 @@ class WindowManager {
       minHeight: isFirstBoot ? 580 : 600,
       resizable: !isFirstBoot,
       maximizable: !isFirstBoot,
+      show: false, // Hide until maximized
       center: true,
       backgroundColor: '#ffffff',
       titleBarStyle: 'hidden',
@@ -36,6 +37,14 @@ class WindowManager {
         nodeIntegration: false,
         contextIsolation: true
       }
+    });
+
+    // Maximize and show when ready
+    this.mainWindow.once('ready-to-show', () => {
+      if (!isFirstBoot) {
+        this.mainWindow.maximize();
+      }
+      this.mainWindow.show();
     });
 
     // Load frontend
