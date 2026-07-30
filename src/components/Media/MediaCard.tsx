@@ -65,6 +65,8 @@ export default function MediaCard({ item }: { item: any }) {
         bgcolor: isDark ? 'rgba(255,255,255,0.04)' : '#ffffff',
         boxShadow: isDark ? 'none' : '0 4px 20px rgba(0,0,0,0.03)',
         transition: 'background-color 0.2s',
+        willChange: 'transform',
+        transform: 'translateZ(0)',
       }}
     >
       {/* Thumbnail Area */}
@@ -92,6 +94,7 @@ export default function MediaCard({ item }: { item: any }) {
               src={getThumbUrl(item)} 
               alt={item.fileName} 
               loading="lazy" 
+              decoding="async"
               onLoad={() => setIsLoaded(true)}
               onError={() => setIsLoaded(true)}
               style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: isLoaded ? 1 : 0, transition: 'opacity 0.3s ease', zIndex: 2, position: 'absolute', top: 0, left: 0 }} 
@@ -105,6 +108,7 @@ export default function MediaCard({ item }: { item: any }) {
               <img
                 src={`nammil://media/${encodeURIComponent(item.filePath + '_thumb.jpeg')}`}
                 loading="lazy"
+                decoding="async"
                 onLoad={() => setIsLoaded(true)}
                 style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: isLoaded ? 1 : 0, transition: 'opacity 0.3s ease', zIndex: 2, position: 'absolute', top: 0, left: 0 }}
                 onError={(e) => {
