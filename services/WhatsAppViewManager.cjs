@@ -22,14 +22,13 @@ class WhatsAppViewManager {
     });
 
     const settings = this.orchestrator.settingsManager.getSettingsSync();
+    let acceptLanguages = 'en-US,en';
     if (settings.language && settings.language !== 'system') {
-      let langCode = 'en-US';
-      if (settings.language.startsWith('ta')) langCode = 'ta';
-      else if (settings.language.startsWith('ml')) langCode = 'ml';
-      view.webContents.session.setAcceptLanguages([langCode, 'en-US', 'en']);
+      if (settings.language.startsWith('ta')) acceptLanguages = 'ta,en-US;q=0.9,en;q=0.8';
+      else if (settings.language.startsWith('ml')) acceptLanguages = 'ml,en-US;q=0.9,en;q=0.8';
     }
 
-    view.webContents.setUserAgent(USER_AGENT);
+    view.webContents.session.setUserAgent(USER_AGENT, acceptLanguages);
     view.webContents.loadURL(WHATSAPP_URL);
 
     view.webContents.session.setPermissionRequestHandler((webContents, permission, callback) => {
